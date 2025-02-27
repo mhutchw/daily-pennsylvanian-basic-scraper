@@ -151,4 +151,30 @@ But it is important to use it responsibly and ethically. Here are some guideline
 - The scraper sends a request to the **Sports section URL**.
 - It finds the first article's headline using the `div` with class `row section-article` and extracts the `h2` text.
 - The extracted headline is saved into `data/daily_pennsylvanian_headlines.json`, creating a historical log of sports headlines over time.
+- 
+
+# Daily Pennsylvanian Sports Headline Scraper
+
+## 📌 Overview
+This project is a Git scraper that **automatically collects** the top sports headline from [The Daily Pennsylvanian](https://www.thedp.com/section/sports) every day and commits it to this repository. It uses **GitHub Actions** to run the scraper at scheduled intervals.
+
+## 🔄 How It Works
+1. The script fetches the **sports section** of the Daily Pennsylvanian.
+2. It extracts the **top sports headline** from the latest article.
+3. The extracted headline is saved to `data/daily_pennsylvanian_headlines.json`.
+4. The scraper runs **twice per day (8 AM and 8 PM UTC)**.
+
+## 🛠️ Changes Implemented
+### **1️⃣ Scraping the Top Sports Headline**
+- Previously, the scraper fetched the **main homepage headline**.  
+- Now, it **targets the top article** in the **sports section** instead.
+- The logic was updated to:
+  - Navigate to `https://www.thedp.com/section/sports`
+  - Locate the **first article container** (`div.row.section-article`)
+  - Extract the **headline text** inside the `col-md-8` div.
+
+### **2️⃣ Updated GitHub Actions Schedule**
+- The scraper originally ran **once per day**.
+- We modified the workflow file (`.github/workflows/scrape.yaml`) to **run twice per day** 
+
 
