@@ -135,3 +135,20 @@ But it is important to use it responsibly and ethically. Here are some guideline
 9. Document your scraping process thoroughly for replicability, transparency and accountability.
 
 10. Continuously re-evaluate your scraping program against applicable laws and ethical principles.
+
+
+## Scraper Modification
+
+### Changes Made
+- The scraper now fetches the **top Sports headline** instead of the main front-page headline.
+- Modified `script.py` to navigate to `https://www.thedp.com/section/sports`.
+- Updated the BeautifulSoup parsing to extract the first `h2` headline in the **Sports section**.
+
+### Why These Changes?
+- Instead of tracking all types of news, I wanted to specifically focus on sports headlines to analyze trends in Penn Athletics coverage.
+
+### How It Works Now
+- The scraper sends a request to the **Sports section URL**.
+- It finds the first article's headline using the `div` with class `row section-article` and extracts the `h2` text.
+- The extracted headline is saved into `data/daily_pennsylvanian_headlines.json`, creating a historical log of sports headlines over time.
+
