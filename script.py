@@ -12,6 +12,9 @@ import bs4
 import requests
 import loguru
 
+if not os.path.exists("data"):
+    os.makedirs("data")
+
 
 def scrape_data_point():
     """
