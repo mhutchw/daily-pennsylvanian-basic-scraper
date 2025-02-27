@@ -26,14 +26,20 @@ def scrape_data_point():
     headers = {
         "User-Agent": "cis3500-scraper"
     }
-    req = requests.get("https://www.thedp.com", headers=headers)
+    req = requests.get("https://www.thedp.com/section/sports", headers=headers)
     loguru.logger.info(f"Request URL: {req.url}")
     loguru.logger.info(f"Request status code: {req.status_code}")
 
     if req.ok:
         soup = bs4.BeautifulSoup(req.text, "html.parser")
-        target_element = soup.find("a", class_="frontpage-link")
-        data_point = "" if target_element is None else target_element.text
+        # Find the first sports article
+        first_article = soup.find("div", class_="row section-article")
+        if first_article:
+            headline = first_article.find("h2")
+            data_point = headline.text.strip() if headline else ""
+        else:
+            data_point = ""
+
         loguru.logger.info(f"Data point: {data_point}")
         return data_point
 
